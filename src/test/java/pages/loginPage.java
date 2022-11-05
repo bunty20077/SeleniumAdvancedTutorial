@@ -5,16 +5,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utilities.DriverFactory;
 
 public class loginPage {
 
     WebDriver driver;
 
 
-    public loginPage( WebDriver driver )
+   public loginPage( WebDriver driver )
     {
         PageFactory.initElements( driver, this);
     }
+
+
 
     @FindBy(id = "user-name")
     private WebElement usernameField;
@@ -29,5 +32,9 @@ public class loginPage {
         passwordField.sendKeys(password);
         loginBtn.click();
 
+
+
     }
+
+
 }

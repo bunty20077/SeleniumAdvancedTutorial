@@ -15,10 +15,6 @@ public class addProductToCartTest {
         WebDriver driver = DriverFactory.getBrowser("Chrome");
         loginPage loginPage = new loginPage(driver);
         driver.get("https://www.saucedemo.com/");
-        //  driver.findElement(By.id("user-name")).sendKeys("standard_user");
-       // driver.findElement(By.id("password")).sendKeys("secret_sauce");
-       // driver.findElement(By.id("login-button")).click();
-
 
         loginPage.enterLoginDetails("standard_user","secret_sauce");
 
