@@ -1,23 +1,22 @@
-package utilities;
+package driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import java.util.HashMap;
-import java.util.Map;
 
-public class DriverFactory {
+public class DriverManagerFactory {
 
     private static WebDriver driver;
+    static DriverManager driverManager = null;
     /*
      * Factory method for getting driver and browsers
      * WebDriverManager is an open-source Java library that carries out the management
      * (i.e., download, setup, and maintenance) of the drivers required by Selenium WebDriver.
      */
 
-
+/*
     public static WebDriver getBrowser(String browserName) {
 
         String runMode = "LocalDesktop";
@@ -69,11 +68,29 @@ public class DriverFactory {
         }
         return driver;
     }
+
+ */
     /*
      * CloseAllDriver is used to quit and close the driver instance.
      */
+
+
+
+    public static DriverManager getManger(DriverType type) {
+
+        switch (type) {
+            case CHROME:
+                driverManager = new ChromeDriverManager();
+                break;
+            case FIREFOX:
+                driverManager = new FirefoxDriverManager();
+                break;
+        }
+        return driverManager;
+    }
+
+
     public static void closeAllDriver() {
-        driver.close();
-        driver.quit();
+        driverManager.quitDriver();
     }
 }
