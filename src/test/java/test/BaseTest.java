@@ -21,6 +21,8 @@ public class BaseTest {
         driverManager = DriverManagerFactory.getManger(DriverType.CHROME);
         driver = driverManager.getDriver();
 
+
+
     }
 
     @AfterMethod
