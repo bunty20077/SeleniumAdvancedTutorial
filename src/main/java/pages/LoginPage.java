@@ -8,14 +8,14 @@ import org.openqa.selenium.support.PageFactory;
 public class loginPage {
 
     WebDriver driver;
+    private static String url = "https://www.saucedemo.com/";
 
 
    public loginPage( WebDriver driver )
     {
         PageFactory.initElements( driver, this);
+        this.driver = driver;
     }
-
-
 
     @FindBy(id = "user-name")
     private WebElement usernameField;
@@ -30,8 +30,11 @@ public class loginPage {
         passwordField.sendKeys(password);
         loginBtn.click();
 
+    }
 
+    public void launchUrl(){
 
+        driver.get(url);
     }
 
 
