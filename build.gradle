@@ -2,6 +2,9 @@ plugins {
     id 'java'
 }
 
+apply plugin: 'groovy'
+apply plugin: 'application'
+
 group 'org.example'
 version '1.0-SNAPSHOT'
 
@@ -17,5 +20,36 @@ dependencies {
 }
 
 test {
-   useTestNG()
+
+    def browserList = ['chrome', 'edge', 'firefox', 'safari']
+    if (project.hasProperty('browser')) {
+        def browserProperty = project.findProperty('browser')
+        if (browserList.contains(browserProperty)) {
+
+            systemProperty('browser', browserProperty)
+        } else {
+            throw new GradleException('Please enter correct browser ' + browserList.toString())
+        }
+    }
+
+
+    useTestNG()
+            {
+                def systemProperties = System.getProperties()
+
+                // Parallel Execution Threadcount. If 2 , then 2 browser instance will run parallely.
+                // use options
+                maxParallelForks = 2
+
+            }
+
 }
+
+/*
+test {
+    def systemProperties = System.getProperties()
+    useTestNG()
+}
+
+-Penv=QA
+*/

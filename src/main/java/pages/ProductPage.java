@@ -1,10 +1,12 @@
 package pages;
 
+import driver.DriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,20 +22,18 @@ public class ProductPage extends BasePage{
     private final By filterDropdown = By.className("product_sort_container");
     private final By priceOfItemsElements = By.className("inventory_item_price");
 
-
+/*
     public ProductPage(WebDriver driver) {
         super(driver);
     }
-
-    public ProductItemPage clickProduct(){
-        driver.findElement(sauceLabsBackpackProduct).click();
-        return new ProductItemPage(driver);
+*/
+    public ProductItemPage clickProduct() {
+        clickElement(sauceLabsBackpackProduct);
+        return new ProductItemPage();
     }
 
-    public ProductPage isInventoryPage(){
-        String actualText = driver.findElement(headerText).getText();
-        Assert.assertEquals(actualText,"PRODUCTS");
-        return this;
+    public String getInventoryPageTitle()    {
+       return getText(headerText);
     }
 
     public ProductPage filterByPrice(String chooseElementText){
@@ -59,7 +59,7 @@ public class ProductPage extends BasePage{
         expectedList.add("$29.99");
         expectedList.add("$49.99");
 
-        List<WebElement> elementNames =driver.findElements(priceOfItemsElements);
+        List<WebElement> elementNames =findElementsInList(priceOfItemsElements);
        // elementNames.forEach(elementName->System.out.println(elementName.getText()));
         List<String> actualList=new ArrayList<String>();
         elementNames.forEach(elementName->actualList.add(elementName.getText()));

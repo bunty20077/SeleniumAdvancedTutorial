@@ -6,9 +6,9 @@ import org.testng.Assert;
 
 public class CartPage extends BasePage{
 
-    public CartPage(WebDriver driver) {
-        super(driver);
-    }
+//    public CartPage(WebDriver driver) {
+//        super(driver);
+//    }
 
     private final By itemCountLocator = By.className("shopping_cart_badge");
 

@@ -5,37 +5,31 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
 
-    private static String url = "https://www.saucedemo.com/";
+    private static final By usernameField = By.id("user-name");
+    private static final By passwordField = By.id("password");
+    private static final By loginBtn = By.id("login-button");
 
-    private final By usernameField = By.id("user-name");
-    private final By passwordField = By.id("password");
-    private final By loginBtn = By.id("login-button");
-
-
+/*
     public LoginPage(WebDriver driver) {
         super(driver);
     }
+*/
 
-    public LoginPage openUrl(){
-        driver.get(url);
+    public LoginPage enterUsername(String username) {
+        enterText(usernameField, username);
         return this;
     }
 
-    public LoginPage enterUsername(String username){
-        enterText(usernameField,username);
+    public LoginPage enterPassword(String password) {
+        enterText(passwordField, password);
         return this;
     }
 
-    public LoginPage enterPassword(String password){
-        enterText(passwordField,password);
-        return this;
-    }
-
-    public ProductPage submitLogin(){
+    public ProductPage submitLogin() {
         clickElement(loginBtn);
-        return new ProductPage(driver);
+        return new ProductPage();
     }
 }

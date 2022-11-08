@@ -6,19 +6,17 @@ import pages.ProductPage;
 
 public class filterByPriceTest extends BaseTest{
 
-  /*  LoginPage loginPage ;
-    ProductPage productPage ;*/
+
+    ProductPage productPage = new ProductPage();
+    LoginPage loginPage = new LoginPage();
 
     @Test
     public void filterByPriceTest(){
 
-        loginPage = new LoginPage(driver);
-        loginPage.openUrl();
         loginPage.enterUsername("standard_user")
-                .enterPassword("secret_sauce");
-
-        productPage = loginPage.submitLogin();
-        productPage.isInventoryPage();
+                .enterPassword("secret_sauce")
+                .submitLogin()
+                .getInventoryPageTitle();
 
         productPage.filterByPrice("lohi");
 

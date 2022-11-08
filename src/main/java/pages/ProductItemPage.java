@@ -5,10 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 public class ProductItemPage extends BasePage{
-
+/*
     public ProductItemPage(WebDriver driver) {
         super(driver);
     }
+    */
+
     private final By productDesc = By.xpath("//*[@id=\"inventory_item_container\"]/div/div/div[2]/div[2]");
     private final By addtoCartBtn = By.id("add-to-cart-sauce-labs-backpack");
 
@@ -23,6 +25,6 @@ public class ProductItemPage extends BasePage{
 
     public CartPage addtoCart(){
         clickElement(addtoCartBtn);
-        return new CartPage(driver);
+        return new CartPage();
     }
 }
