@@ -1,41 +1,41 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class loginPage {
+public class LoginPage extends BasePage{
 
-    WebDriver driver;
+
     private static String url = "https://www.saucedemo.com/";
 
+    private final By usernameField = By.id("user-name");
+    private final By passwordField = By.id("password");
+    private final By loginBtn = By.id("login-button");
 
-   public loginPage( WebDriver driver )
-    {
-        PageFactory.initElements( driver, this);
-        this.driver = driver;
+
+    public LoginPage(WebDriver driver) {
+        super(driver);
     }
 
-    @FindBy(id = "user-name")
-    private WebElement usernameField;
-    @FindBy(id = "password")
-    private WebElement passwordField;
-    @FindBy(id = "login-button")
-    private WebElement loginBtn;
-
-    public  void enterLoginDetails(String username, String password) {
-
-        usernameField.sendKeys(username);
-        passwordField.sendKeys(password);
-        loginBtn.click();
-
-    }
-
-    public void launchUrl(){
-
+    public LoginPage openUrl(){
         driver.get(url);
+        return this;
     }
 
+    public LoginPage enterUsername(String username){
+        enterText(usernameField,username);
+        return this;
+    }
 
+    public LoginPage enterPassword(String password){
+        enterText(passwordField,password);
+        return this;
+    }
+
+    public ProductPage submitLogin(){
+        clickElement(loginBtn);
+        return new ProductPage(driver);
+    }
 }

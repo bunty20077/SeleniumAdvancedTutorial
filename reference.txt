@@ -1,0 +1,18 @@
+https://github.com/writeonk/SeleniumWebdriverGradleDemo/tree/master/src/test/java/com/test/app
+
+
+1. Remove object creation in main entry test class
+Solution : can I create all Page Objects in BaseTest ? Like LoginPage , ProductPage in BaseTest ?
+2. Parameterize run using gradle
+3. Page extends BasePage
+4. How to run gradle project.
+
+
+
+
+
+1. Use logger
+2. Use reports like allure or extent
+3. Use logic to run same test in different browser
+4. Use logic to run same test in local or cloud tools
+5. Use logic to run group of tests in smoke testing and some in regression testing.

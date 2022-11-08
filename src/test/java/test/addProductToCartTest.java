@@ -1,33 +1,35 @@
 package test;
 
-import org.openqa.selenium.By;
-import org.testng.Assert;
-import pages.HomePage;
+import pages.CartPage;
 import pages.LoginPage;
 import org.testng.annotations.Test;
+import pages.ProductItemPage;
+import pages.ProductPage;
 import java.io.IOException;
 
 public class addProductToCartTest extends BaseTest{
 
+/*    LoginPage loginPage ;
+    ProductPage productPage ;
+    ProductItemPage productItemPage;
+    CartPage cartPage;*/
+
     @Test
     public void sampleTest001() throws IOException, InterruptedException {
 
-
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage ;
-        launchWebsiteTest launchWebsiteTest = new launchWebsiteTest(driver);
-
-        launchWebsiteTest.launchUrl();
+        LoginPage loginPage= new LoginPage(driver);
+        loginPage.openUrl();
         loginPage.enterUsername("standard_user")
                  .enterPassword("secret_sauce");
-        homePage = loginPage.submitLogin();
 
-        String actualText = driver.findElement(By.xpath("//*[@id=\"header_container\"]/div[2]/span")).getText();
-        Assert.assertEquals(actualText,"PRODUCTS");
-        homePage.clickProduct();
-        String productDesc = driver.findElement(By.xpath("//*[@id=\"inventory_item_container\"]/div/div/div[2]/div[2]")).getText();
-        System.out.println(productDesc);
+        productPage = loginPage.submitLogin();
+        productPage.isInventoryPage();
 
+        productItemPage = productPage.clickProduct();
+        productItemPage.checkProductDescription();
+
+        cartPage = productItemPage.addtoCart();
+        cartPage.verifyItemCountInCart();
 
 
 
