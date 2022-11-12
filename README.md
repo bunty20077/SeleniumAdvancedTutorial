@@ -38,3 +38,13 @@ def groups = project.findProperty('groups')
 ```bash
   ./gradlew clean test -Pbrowser=chrome -Pgroups=SanityTest
 ```
+
+One Liner Command 
+```bash
+  ./gradlew clean test -Pbrowser=chrome -Pgroups=SanityTest -Pservice=local
+```
+Available options :
+
+service = cloud/docker/local
+browser = chrome/firefox/edge
+groups = SanityTest/SmokeTest
