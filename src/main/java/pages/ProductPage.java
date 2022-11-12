@@ -1,16 +1,13 @@
 package pages;
 
-import driver.DriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductPage extends BasePage{
+public class ProductPage extends BasePage {
 
     private static String url = "https://www.saucedemo.com/";
 
@@ -22,23 +19,23 @@ public class ProductPage extends BasePage{
     private final By filterDropdown = By.className("product_sort_container");
     private final By priceOfItemsElements = By.className("inventory_item_price");
 
-/*
-    public ProductPage(WebDriver driver) {
-        super(driver);
-    }
-*/
+    /*
+        public ProductPage(WebDriver driver) {
+            super(driver);
+        }
+    */
     public ProductItemPage clickProduct() {
         clickElement(sauceLabsBackpackProduct);
         return new ProductItemPage();
     }
 
-    public String getInventoryPageTitle()    {
-       return getText(headerText);
+    public String getInventoryPageTitle() {
+        return getText(headerText);
     }
 
-    public ProductPage filterByPrice(String chooseElementText){
-        chooseElementFromDropDown(filterDropdown,chooseElementText);
-        checkfilteredItemByPrice();
+    public ProductPage filterByPrice(String chooseElementText) {
+        chooseElementFromDropDown(filterDropdown, chooseElementText);
+        // checkfilteredItemByPrice();
         return this;
     }
 
@@ -48,9 +45,18 @@ public class ProductPage extends BasePage{
      * Another arraylist named actualList is used to capture price using classname locator and add in actualList arraylist.
      * Then both arraylist is compared.
      */
-    public ProductPage checkfilteredItemByPrice(){
+    public List<String> checkfilteredItemByPrice() {
 
-        List<String> expectedList=new ArrayList<String>();
+        List<WebElement> elementNames = findElementsInList(priceOfItemsElements);
+        List<String> actualList = new ArrayList<String>();
+        elementNames.forEach(elementName -> actualList.add(elementName.getText()));
+        // Assert.assertEquals(expectedList,actualList);
+        return actualList;
+    }
+
+    public List<String> assertFlteredItemByPrice() {
+
+        List<String> expectedList = new ArrayList<String>();
 
         expectedList.add("$7.99");
         expectedList.add("$9.99");
@@ -59,11 +65,6 @@ public class ProductPage extends BasePage{
         expectedList.add("$29.99");
         expectedList.add("$49.99");
 
-        List<WebElement> elementNames =findElementsInList(priceOfItemsElements);
-       // elementNames.forEach(elementName->System.out.println(elementName.getText()));
-        List<String> actualList=new ArrayList<String>();
-        elementNames.forEach(elementName->actualList.add(elementName.getText()));
-        Assert.assertEquals(expectedList,actualList);
-        return this;
+        return expectedList;
     }
 }

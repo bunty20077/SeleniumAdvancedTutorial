@@ -6,7 +6,6 @@ apply plugin: 'groovy'
 apply plugin: 'application'
 
 group 'org.example'
-version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -16,7 +15,11 @@ dependencies {
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.5.3'
     implementation 'org.testng:testng:7.1.0'
     implementation 'io.github.bonigarcia:webdrivermanager:5.3.1'
-
+    implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.19.0'
+    implementation group: 'com.aventstack', name: 'extentreports', version: '5.0.9'
+    implementation 'org.testng:testng:7.1.0'
+    implementation 'org.testng:testng:7.1.0'
 }
 
 test {
@@ -25,13 +28,16 @@ test {
     if (project.hasProperty('browser')) {
         def browserProperty = project.findProperty('browser')
         if (browserList.contains(browserProperty)) {
-
             systemProperty('browser', browserProperty)
         } else {
             throw new GradleException('Please enter correct browser ' + browserList.toString())
         }
     }
 
+    // If below is executed then command will be -Dgroups=SanityTesting
+    //def groups = System.getProperty('groups')
+    // If below is executed then command will be -Pgroups=SanityTesting
+    def groups = project.findProperty('groups')
 
     useTestNG()
             {
@@ -39,7 +45,8 @@ test {
 
                 // Parallel Execution Threadcount. If 2 , then 2 browser instance will run parallely.
                 // use options
-                maxParallelForks = 2
+                maxParallelForks = 1
+                includeGroups groups
 
             }
 

@@ -18,14 +18,16 @@ public final class DriverFactory {
      */
 
     //Private Constructor so that not to inherit by other classes
-    private DriverFactory(){
+    private DriverFactory() {
 
     }
 
 
     public static WebDriver getDriver() {
         String browserName = System.getProperty("browser");
-        //String browserName = "chrome";
+        if (browserName == null) {
+            browserName = "chrome";
+        }
         WebDriver driver = null;
         switch (browserName) {
             case "chrome":
