@@ -51,12 +51,3 @@ test {
             }
 
 }
-
-/*
-test {
-    def systemProperties = System.getProperties()
-    useTestNG()
-}
-
--Penv=QA
-*/
