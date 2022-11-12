@@ -29,8 +29,6 @@ test {
         def browserProperty = project.findProperty('browser')
         if (browserList.contains(browserProperty)) {
             systemProperty('browser', browserProperty)
-        } else {
-            throw new GradleException('Please enter correct browser ' + browserList.toString())
         }
     }
 
@@ -38,7 +36,8 @@ test {
     //def groups = System.getProperty('groups')
     // If below is executed then command will be -Pgroups=SanityTesting
     def groups = project.findProperty('groups')
-
+    def service = project.findProperty('service')
+    systemProperty('service', service)
     useTestNG()
             {
                 def systemProperties = System.getProperties()
